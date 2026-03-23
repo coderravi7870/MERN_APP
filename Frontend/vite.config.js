@@ -9,7 +9,7 @@ export default defineConfig({
     port: 5173,
     proxy: {
       '/api': {
-        target: 'https://mern-app-0w9n.onrender.com'',
+        target: 'https://mern-app-0w9n.onrender.com',
         changeOrigin: true,
       },
     },
