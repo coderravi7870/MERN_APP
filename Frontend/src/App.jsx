@@ -98,7 +98,7 @@ export default function App() {
     setSaveStatus(null);
 
     try {
-      const res = await axios.post('/api/ask-ai', { prompt });
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/ask-ai`, { prompt });
       setResponse(res.data.response);
     } catch (err) {
       const msg = err.response?.data?.error || 'Failed to get AI response. Check your API key.';
@@ -118,7 +118,7 @@ export default function App() {
     setPrompt('');
     setResponse('');
     try {
-      await axios.post('/api/save', { prompt, response });
+      await axios.post(`${import.meta.env.VITE_API_URL}/save`, { prompt, response });
       setSaveStatus('saved');
     } catch (err) {
       setSaveStatus('error');
@@ -130,7 +130,7 @@ export default function App() {
   // Fetch history from MongoDB
   const handleViewHistory = async () => {
     try {
-      const res = await axios.get('/api/history');
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/history`);
       setHistory(res.data);
       setShowHistory(true);
     } catch (err) {
