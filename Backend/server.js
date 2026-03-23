@@ -6,27 +6,43 @@ import { connectDB } from './config/db.js';
 
 dotenv.config();
 
-wait connectDB();
-
-
-
 const app = express();
 
+
 app.use(cors({
-  origin: "*",
+  origin: process.env.FRONTEND_URL || "*",
   credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 
 import apiRoutes from './routes/api.js';
 
-// Routes
+
 app.use('/api', apiRoutes);
 
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
-});
+const startServer = async () => {
+  try {
+    
+    await connectDB();
+    
+    const PORT = process.env.PORT || 5000;
+    app.listen(PORT, () => {
+      console.log(`🚀 Server running on port ${PORT}`);
+      console.log(`📍 Environment: ${process.env.NODE_ENV || 'development'}`);
+      console.log(`🔗 Frontend URL: ${process.env.FRONTEND_URL || 'Not set'}`);
+    });
+  } catch (error) {
+    console.error('❌ Failed to start server:', error.message);
+    process.exit(1);
+  }
+};
+
+
+
+startServer();
