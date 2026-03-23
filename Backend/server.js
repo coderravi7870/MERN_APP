@@ -13,7 +13,7 @@ connectDB();
 const app = express();
 
 app.use(cors({
-  origin: [process.env.FRONTEND_URL, 'https://mern-app-eta-wood.vercel.app'],
+  origin: "*",
   credentials: true,
 }));
 
