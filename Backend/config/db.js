@@ -15,9 +15,6 @@ export const connectDB = async () => {
       w: 'majority'
     });
     
-    console.log(`✅ MongoDB Connected Successfully!`);
-    console.log(`📊 Database: ${conn.connection.name}`);
-    console.log(`🌐 Host: ${conn.connection.host}`);
     
     // Handle connection events
     mongoose.connection.on('error', (err) => {
