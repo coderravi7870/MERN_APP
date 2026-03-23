@@ -1,4 +1,3 @@
-// config/db.js
 import mongoose from 'mongoose';
 
 export const connectDB = async () => {
@@ -7,7 +6,6 @@ export const connectDB = async () => {
       throw new Error('MONGODB_URI is not defined in environment variables');
     }
 
-    // Remove deprecated options - they're now default in newer MongoDB driver
     const conn = await mongoose.connect(process.env.MONGODB_URI, {
       serverSelectionTimeoutMS: 30000,
       socketTimeoutMS: 45000,
