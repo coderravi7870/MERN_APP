@@ -127,8 +127,8 @@ export default function App() {
       return;
     }
     setSaveStatus("saving");
-    // setPrompt('');
-    // setResponse('');
+    setPrompt('');
+    setResponse('');
     try {
       await axios.post(`${import.meta.env.VITE_API_URL}/save`, {
         prompt,
